@@ -1,24 +1,42 @@
-// AddAdopterForm.jsx
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const AddAdopterForm = ({ onAdopterSubmit }) => {
-    const [adopterName, setAdopterName] = useState('');
+    const [adopterNames, setAdopterNames] = useState(['', '', '']);
+    
+    const handleInputChange = (index, value) => {
+        const newAdopterNames = [...adopterNames];
+        newAdopterNames[index] = value;
+        setAdopterNames(newAdopterNames);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (adopterName) {
-            onAdopterSubmit(adopterName);
-            setAdopterName('');
-        } else {
-            console.error('Debe ingresar una respuesta.');
+
+        for (const adopterName of adopterNames) {
+            if (!adopterName) {
+                console.error('Debe ingresar respuestas válidas.');
+                return;
+            }
         }
+
+        onAdopterSubmit(adopterNames);
+        setAdopterNames(['', '', '']);
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={adopterName} onChange={(e) => setAdopterName(e.target.value)} placeholder="Respuesta" />
-            <button type="submit">Agregar respuesta</button>
+            {adopterNames.map((adopterName, index) => (
+                <input
+                    key={index}
+                    type="text"
+                    value={adopterName}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                    placeholder={`Respuesta ${index + 1}`}
+                />
+            ))}
+            <br />
+            <button type="submit">Agregar respuestas</button>
         </form>
     );
 };

@@ -5,6 +5,8 @@ import AdoptionList from './components/AdoptionList';
 import AvailableList from './components/AvailableList';
 import AddDogForm from './components/AddDogForm';
 import AddAdopterForm from './components/AddAdopterForm';
+import Evaluacion from './pages/evaluacion';
+import { Routes, Route, Link } from 'react-router-dom';
 
 const App = () => {
   const [dogs, setDogs] = useState([]);
@@ -72,18 +74,27 @@ const App = () => {
 
   return (
     <div className="App">
+
        <h5 style={{ marginTop: 0, textAlign: 'left' }}>ROL: Profesor</h5>
-      <h1>Respuestas y Preguntas</h1>
+      <h2>Respuestas y Preguntas</h2>
       <AvailableList dogs={dogs} adopters={adopters} />
-      <h1>Agregar nueva pregunta</h1>
+      <h2>Agregar nueva pregunta</h2>
       <AddDogForm onDogSubmit={handleDogSubmit} />
-      <h1>Agregar nueva respuesta</h1>
+      <h2>Agregar nueva respuesta</h2>
       <AddAdopterForm onAdopterSubmit={handleAdopterSubmit} />
-      <h1>Asignar Respuestas</h1>
+      <h2>Asignar Respuestas</h2>
       <AdoptionForm dogs={dogs} adopters={adopters} onAdoptionSubmit={handleAdoptionSubmit} />
       <div className="Eva">
-      <h1>Evaluación</h1>
-      <AdoptionList adoptions={adoptions} dogs={dogs} adopters={adopters} />
+
+      <h1>Visualizar evaluacion</h1>
+      <Routes>
+        <Route path='/evaluacion' element ={<Evaluacion></Evaluacion>}></Route>
+      </Routes>
+      <Link to='/evaluacion'>
+            <button>Cargar Evaluación</button>
+      </Link>
+      
+      {/* <AdoptionList adoptions={adoptions} dogs={dogs} adopters={adopters} /> */}
       </div>
 
     </div>

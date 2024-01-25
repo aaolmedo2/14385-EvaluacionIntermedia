@@ -19,6 +19,7 @@ const AddDogForm = ({ onDogSubmit }) => {
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" value={dogName} onChange={(e) => setDogName(e.target.value)} placeholder="Pregunta" />
+            <br />
              <button type="submit">Agregar pregunta</button>
         </form>
     );
